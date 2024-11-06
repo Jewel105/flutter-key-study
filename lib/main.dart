@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:key_study/box_ful_wiget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,33 +29,61 @@ class MyAppPage extends StatefulWidget {
 }
 
 class _MyAppPageState extends State<MyAppPage> {
+  // List<Widget> boxes = [
+  //   BoxLessWiget(
+  //     title: 'box1',
+  //     key: UniqueKey(),
+  //   ),
+  //   BoxLessWiget(
+  //     title: 'box2',
+  //     key: UniqueKey(),
+  //   ),
+  // ];
+
+  List<Widget> boxes = [
+    BoxFulWiget(
+      title: 'box1',
+      key: UniqueKey(),
+    ),
+    BoxFulWiget(
+      title: 'box2',
+      key: UniqueKey(),
+    ),
+  ];
+
+  var keyData1 = {'box2': "1"};
+  var keyData2 = {'box2': "2"};
+
+  void swapBoxs() {
+    boxes = [
+      BoxFulWiget(
+        title: 'box2',
+        key: ObjectKey(keyData1),
+      ),
+      BoxFulWiget(
+        title: 'box1',
+        key: ObjectKey(keyData2),
+      ),
+    ];
+    // boxes.insert(1, boxes.removeAt(0));
+    // boxes.insert(1, boxes.removeAt(0));
+    // boxes.removeAt(0);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    print("object");
     return Scaffold(
       body: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 100,
-              height: 100,
-              alignment: Alignment.center,
-              child: Text("box1"),
-              color: Colors.blue,
-            ),
-            Container(
-              width: 100,
-              height: 100,
-              alignment: Alignment.center,
-              child: Text("box2"),
-              color: Colors.red,
-            ),
-          ],
+          children: boxes,
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
+        onPressed: swapBoxs,
+        child: const Icon(Icons.currency_exchange),
       ),
     );
   }
